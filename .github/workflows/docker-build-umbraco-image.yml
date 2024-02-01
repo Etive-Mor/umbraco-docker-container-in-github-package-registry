@@ -1,0 +1,17 @@
+name: Docker Build Umbraco Image
+
+on:
+  push:
+    branches: [ "main", "stage", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:  
+  build-umbraco-container:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Umbraco Docker image
+      run: docker build . --file ./Dockerfile --tag my-image-name:$(date +%s)
